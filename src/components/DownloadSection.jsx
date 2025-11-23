@@ -28,9 +28,13 @@ const DownloadSection = () => {
                             <h3 className="text-xl font-bold text-white mb-2">Windows</h3>
                             <p className="text-sm text-gray-400 mb-6">Windows 10/11 (64-bit)</p>
 
-                            <button className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 font-bold text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all hover:-translate-y-1">
+                            <a
+                                href="https://github.com/harshqs/mint-player-website/releases/download/v0.0.0/Mint.Player.Setup.0.0.0.exe"
+                                className="w-full py-3 rounded-xl bg-gradient-to-r from-blue-500 to-cyan-500 font-bold text-white hover:shadow-lg hover:shadow-cyan-500/25 transition-all hover:-translate-y-1 text-center block"
+                                download
+                            >
                                 Download .exe
-                            </button>
+                            </a>
                         </div>
                     </div>
 
