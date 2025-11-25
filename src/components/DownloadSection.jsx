@@ -237,7 +237,7 @@ const DownloadSection = () => {
                         platform="Windows"
                         icon={Monitor}
                         description="Windows 10/11 (64-bit)"
-                        downloadLink="https://github.com/harshqs/mint-player-website/releases/download/v3.0.4/Mint-Player-Setup-3.0.4.exe"
+                        downloadLink="https://github.com/harshqs/mint-player-website/releases/download/v4.0.2/Mint-Player-Setup-4.0.2.exe"
                         available={true}
                         delay={0.6}
                     />
