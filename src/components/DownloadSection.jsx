@@ -205,7 +205,7 @@ const DownloadSection = () => {
                         className="w-2.5 h-2.5 rounded-full bg-mint-500"
                     />
                     <Sparkles size={16} className="text-mint-400" />
-                    <span className="text-sm font-semibold text-mint-400">Latest Version 4.0.1</span>
+                    <span className="text-sm font-semibold text-mint-400">Latest Version 4.0.2</span>
                     <CheckCircle size={16} className="text-mint-400" />
                 </motion.div>
 
