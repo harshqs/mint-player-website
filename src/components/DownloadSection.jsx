@@ -1,127 +1,260 @@
-import React from 'react';
-import { Monitor, Hammer, Download, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { Monitor, Hammer, Download, ArrowRight, Sparkles, CheckCircle } from 'lucide-react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+
+const DownloadCard = ({ platform, icon: Icon, description, downloadLink, available = true, delay }) => {
+    const cardRef = useRef(null);
+    const [isHovered, setIsHovered] = useState(false);
+
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), { damping: 20, stiffness: 200 });
+    const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), { damping: 20, stiffness: 200 });
+
+    const handleMouseMove = (e) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        mouseX.set((e.clientX - centerX) / (rect.width / 2));
+        mouseY.set((e.clientY - centerY) / (rect.height / 2));
+    };
+
+    const handleMouseLeave = () => {
+        mouseX.set(0);
+        mouseY.set(0);
+        setIsHovered(false);
+    };
+
+    return (
+        <motion.div
+            ref={cardRef}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay, duration: 0.5 }}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={handleMouseLeave}
+            style={{
+                rotateX: available ? rotateX : 0,
+                rotateY: available ? rotateY : 0,
+                transformStyle: 'preserve-3d',
+            }}
+            className={`relative glass-card p-8 rounded-2xl w-full md:w-1/3 overflow-hidden border-2 
+                ${available ? 'border-mint-500/30 shadow-xl shadow-mint-500/10' : 'opacity-60 grayscale hover:grayscale-0 border-white/10'}
+                transition-all duration-500`}
+        >
+            {/* Holographic Background Effect */}
+            {available && isHovered && (
+                <motion.div
+                    className="absolute inset-0 holographic opacity-30"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.3 }}
+                />
+            )}
+
+            {/* Shimmer Effect */}
+            {available && (
+                <motion.div
+                    className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity"
+                    style={{
+                        background: 'linear-gradient(135deg, transparent 0%, rgba(16, 185, 129, 0.1) 50%, transparent 100%)',
+                        backgroundSize: '200% 200%',
+                    }}
+                    animate={{
+                        backgroundPosition: ['0% 0%', '100% 100%'],
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                />
+            )}
+
+            <div className="relative z-10 flex flex-col items-center" style={{ transform: 'translateZ(20px)' }}>
+                {/* Icon */}
+                <motion.div
+                    animate={available && isHovered ? {
+                        scale: [1, 1.1, 1],
+                        rotate: [0, 5, -5, 0]
+                    } : {}}
+                    transition={{ duration: 0.5 }}
+                    className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-6 text-white shadow-lg relative
+                        ${available ? 'bg-gradient-to-br from-mint-500 to-ai-blue shadow-mint-500/30' : 'bg-gray-700/50 text-gray-400'}`}
+                >
+                    {available && (
+                        <motion.div
+                            className="absolute inset-0 rounded-2xl"
+                            animate={{
+                                boxShadow: [
+                                    '0 0 20px rgba(16, 185, 129, 0.3)',
+                                    '0 0 30px rgba(16, 185, 129, 0.5)',
+                                    '0 0 20px rgba(16, 185, 129, 0.3)',
+                                ],
+                            }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                        />
+                    )}
+                    <Icon size={36} />
+                </motion.div>
+
+                {/* Platform Name */}
+                <h3 className={`text-2xl font-bold mb-2 ${available ? 'text-white' : 'text-gray-400'}`}>
+                    {platform}
+                </h3>
+
+                {/* Description */}
+                <p className={`text-sm mb-8 ${available ? 'text-gray-400' : 'text-gray-500'}`}>
+                    {description}
+                </p>
+
+                {/* Download Button */}
+                {available ? (
+                    <motion.a
+                        href={downloadLink}
+                        download
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="relative w-full py-4 rounded-xl bg-gradient-to-r from-mint-500 to-ai-blue font-bold text-white overflow-hidden group"
+                    >
+                        {/* Ripple Effect Background */}
+                        <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-mint-400 to-tech-blue"
+                            initial={{ scale: 0, opacity: 0 }}
+                            whileHover={{ scale: 2, opacity: 0.3 }}
+                            transition={{ duration: 0.6 }}
+                        />
+
+                        <span className="relative z-10 flex items-center justify-center gap-3">
+                            <Download size={20} />
+                            Download {platform === 'Windows' ? '.exe' : platform}
+                            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                        </span>
+                    </motion.a>
+                ) : (
+                    <button
+                        disabled
+                        className="w-full py-4 rounded-xl bg-gray-800 border border-gray-700 text-gray-400 cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                        <Hammer size={18} />
+                        <span>{platform.includes('.deb') ? 'Under Construction' : 'Coming Soon'}</span>
+                    </button>
+                )}
+            </div>
+
+            {/* Corner Accents */}
+            {available && (
+                <>
+                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-mint-500/20 to-transparent rounded-bl-full" />
+                    <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-ai-blue/20 to-transparent rounded-tr-full" />
+                </>
+            )}
+        </motion.div>
+    );
+};
 
 const DownloadSection = () => {
     return (
-        <section id="download" className="py-24 relative overflow-hidden">
+        <section id="download" className="py-32 relative overflow-hidden">
             {/* Background Gradients */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-transparent via-mint-900/10 to-transparent pointer-events-none" />
+
+            {/* Animated Orbs */}
             <motion.div
                 animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.1, 0.2, 0.1],
+                    scale: [1, 1.3, 1],
+                    opacity: [0.1, 0.25, 0.1],
+                    rotate: [0, 180, 360],
                 }}
-                transition={{ duration: 5, repeat: Infinity }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-mint-500/10 rounded-full blur-[100px] pointer-events-none"
+                transition={{ duration: 15, repeat: Infinity }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-mint-500/10 rounded-full blur-[150px] pointer-events-none"
             />
 
+            {/* Floating Particles */}
+            {[...Array(10)].map((_, i) => (
+                <motion.div
+                    key={i}
+                    animate={{
+                        y: [0, -40, 0],
+                        opacity: [0, 0.5, 0],
+                    }}
+                    transition={{
+                        duration: 4 + Math.random() * 3,
+                        repeat: Infinity,
+                        delay: Math.random() * 5,
+                    }}
+                    className="absolute w-2 h-2 bg-mint-400 rounded-full"
+                    style={{
+                        left: `${Math.random() * 100}%`,
+                        top: `${Math.random() * 100}%`,
+                    }}
+                />
+            ))}
+
             <div className="container mx-auto px-6 relative z-10 text-center">
+                {/* Version Badge */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-mint-500/10 border border-mint-500/20 mb-6"
+                    className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-mint-500/10 border border-mint-500/20 mb-8 hover-3d"
                 >
-                    <span className="w-2 h-2 rounded-full bg-mint-500 animate-pulse" />
-                    <span className="text-sm font-medium text-mint-400">Latest Version 2.0.6</span>
+                    <motion.span
+                        animate={{ scale: [1, 1.2, 1] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                        className="w-2.5 h-2.5 rounded-full bg-mint-500"
+                    />
+                    <Sparkles size={16} className="text-mint-400" />
+                    <span className="text-sm font-semibold text-mint-400">Latest Version 4.0.1</span>
+                    <CheckCircle size={16} className="text-mint-400" />
                 </motion.div>
 
+                {/* Heading */}
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 }}
-                    className="text-3xl md:text-5xl font-bold mb-8"
+                    className="text-4xl md:text-6xl font-bold mb-6"
                 >
                     Ready to <span className="text-gradient">Experience It?</span>
                 </motion.h2>
+
+                {/* Subheading */}
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.4 }}
-                    className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto"
+                    className="text-xl md:text-2xl text-gray-400 mb-16 max-w-3xl mx-auto"
                 >
-                    Download Mint Player today and transform how you interact with your media library.
+                    Download Mint Player today and <span className="text-mint-400 font-semibold">transform</span> how you interact with your media library.
                 </motion.p>
 
-                <div className="flex flex-col md:flex-row items-center justify-center gap-6 max-w-4xl mx-auto">
-
-                    {/* Windows Card */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.6 }}
-                        whileHover={{ y: -10 }}
-                        className="glass-card p-8 rounded-2xl w-full md:w-1/3 relative group overflow-hidden border-mint-500/30 shadow-lg shadow-mint-500/10"
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-br from-mint-500/10 to-ai-blue/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-                        <div className="relative z-10 flex flex-col items-center">
-                            <div className="w-16 h-16 bg-gradient-to-br from-mint-500 to-ai-blue rounded-2xl flex items-center justify-center mb-6 text-white shadow-lg shadow-mint-500/20 group-hover:scale-110 transition-transform duration-300">
-                                <Monitor size={32} />
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-2">Windows</h3>
-                            <p className="text-sm text-gray-400 mb-6">Windows 10/11 (64-bit)</p>
-
-                            <a
-                                href="https://github.com/harshqs/mint-player-website/releases/download/v3.0.4/Mint-Player-Setup-3.0.4.exe"
-                                className="w-full py-3 rounded-xl bg-gradient-to-r from-mint-500 to-ai-blue font-bold text-white hover:shadow-lg hover:shadow-mint-500/25 transition-all flex items-center justify-center gap-2 group/btn"
-                                download
-                            >
-                                <Download size={18} />
-                                Download .exe
-                                <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
-                            </a>
-                        </div>
-                    </motion.div>
-
-                    {/* Linux Deb Card */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.7 }}
-                        className="glass-card p-8 rounded-2xl w-full md:w-1/3 opacity-75 grayscale hover:grayscale-0 transition-all hover:opacity-100"
-                    >
-                        <div className="flex flex-col items-center">
-                            <div className="w-16 h-16 bg-gray-700/50 rounded-2xl flex items-center justify-center mb-6 text-gray-400">
-                                <Hammer size={32} />
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-300 mb-2">Linux .deb</h3>
-                            <p className="text-sm text-gray-500 mb-6">Debian / Ubuntu</p>
-
-                            <button disabled className="w-full py-3 rounded-xl bg-gray-800 border border-gray-700 text-gray-400 cursor-not-allowed flex items-center justify-center gap-2">
-                                <Hammer size={16} />
-                                <span>Under Construction</span>
-                            </button>
-                        </div>
-                    </motion.div>
-
-                    {/* Linux RPM Card */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.8 }}
-                        className="glass-card p-8 rounded-2xl w-full md:w-1/3 opacity-75 grayscale hover:grayscale-0 transition-all hover:opacity-100"
-                    >
-                        <div className="flex flex-col items-center">
-                            <div className="w-16 h-16 bg-gray-700/50 rounded-2xl flex items-center justify-center mb-6 text-gray-400">
-                                <Hammer size={32} />
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-300 mb-2">Linux .rpm</h3>
-                            <p className="text-sm text-gray-500 mb-6">Fedora / Red Hat</p>
-
-                            <button disabled className="w-full py-3 rounded-xl bg-gray-800 border border-gray-700 text-gray-400 cursor-not-allowed flex items-center justify-center gap-2">
-                                <Hammer size={16} />
-                                <span>Coming Soon</span>
-                            </button>
-                        </div>
-                    </motion.div>
-
+                {/* Download Cards */}
+                <div className="flex flex-col md:flex-row items-center justify-center gap-8 max-w-6xl mx-auto perspective-1000">
+                    <DownloadCard
+                        platform="Windows"
+                        icon={Monitor}
+                        description="Windows 10/11 (64-bit)"
+                        downloadLink="https://github.com/harshqs/mint-player-website/releases/download/v3.0.4/Mint-Player-Setup-3.0.4.exe"
+                        available={true}
+                        delay={0.6}
+                    />
+                    <DownloadCard
+                        platform="Linux .deb"
+                        icon={Hammer}
+                        description="Debian / Ubuntu"
+                        available={false}
+                        delay={0.7}
+                    />
+                    <DownloadCard
+                        platform="Linux .rpm"
+                        icon={Hammer}
+                        description="Fedora / Red Hat"
+                        available={false}
+                        delay={0.8}
+                    />
                 </div>
             </div>
         </section>
