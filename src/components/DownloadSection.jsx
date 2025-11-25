@@ -67,7 +67,7 @@ const DownloadSection = () => {
                             <p className="text-sm text-gray-400 mb-6">Windows 10/11 (64-bit)</p>
 
                             <a
-                                href="https://github.com/harshqs/mint-player-website/releases/download/v3.0.0/Mint-Player-Setup-3.0.0.exe"
+                                href="https://github.com/harshqs/mint-player-website/releases/download/v3.0.4/Mint-Player-Setup-3.0.4.exe"
                                 className="w-full py-3 rounded-xl bg-gradient-to-r from-mint-500 to-ai-blue font-bold text-white hover:shadow-lg hover:shadow-mint-500/25 transition-all flex items-center justify-center gap-2 group/btn"
                                 download
                             >
