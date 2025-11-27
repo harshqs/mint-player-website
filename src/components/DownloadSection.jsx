@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback, memo } from 'react';
 import { Monitor, Hammer, Download, ArrowRight, Sparkles, CheckCircle } from 'lucide-react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
-const DownloadCard = ({ platform, icon: Icon, description, downloadLink, available = true, delay }) => {
+const DownloadCard = memo(({ platform, icon: Icon, description, downloadLink, available = true, delay }) => {
     const cardRef = useRef(null);
     const [isHovered, setIsHovered] = useState(false);
 
@@ -12,7 +12,7 @@ const DownloadCard = ({ platform, icon: Icon, description, downloadLink, availab
     const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), { damping: 20, stiffness: 200 });
     const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), { damping: 20, stiffness: 200 });
 
-    const handleMouseMove = (e) => {
+    const handleMouseMove = useCallback((e) => {
         if (!cardRef.current) return;
         const rect = cardRef.current.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
@@ -20,13 +20,13 @@ const DownloadCard = ({ platform, icon: Icon, description, downloadLink, availab
 
         mouseX.set((e.clientX - centerX) / (rect.width / 2));
         mouseY.set((e.clientY - centerY) / (rect.height / 2));
-    };
+    }, [mouseX, mouseY]);
 
-    const handleMouseLeave = () => {
+    const handleMouseLeave = useCallback(() => {
         mouseX.set(0);
         mouseY.set(0);
         setIsHovered(false);
-    };
+    }, [mouseX, mouseY]);
 
     return (
         <motion.div
@@ -151,9 +151,11 @@ const DownloadCard = ({ platform, icon: Icon, description, downloadLink, availab
             )}
         </motion.div>
     );
-};
+});
 
-const DownloadSection = () => {
+DownloadCard.displayName = 'DownloadCard';
+
+const DownloadSection = memo(() => {
     return (
         <section id="download" className="py-32 relative overflow-hidden">
             {/* Background Gradients */}
@@ -167,11 +169,11 @@ const DownloadSection = () => {
                     rotate: [0, 180, 360],
                 }}
                 transition={{ duration: 15, repeat: Infinity }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-mint-500/10 rounded-full blur-[150px] pointer-events-none"
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-mint-500/10 rounded-full blur-[150px] pointer-events-none will-change-transform"
             />
 
-            {/* Floating Particles */}
-            {[...Array(10)].map((_, i) => (
+            {/* Floating Particles - Optimized count */}
+            {[...Array(5)].map((_, i) => (
                 <motion.div
                     key={i}
                     animate={{
@@ -183,7 +185,7 @@ const DownloadSection = () => {
                         repeat: Infinity,
                         delay: Math.random() * 5,
                     }}
-                    className="absolute w-2 h-2 bg-mint-400 rounded-full"
+                    className="absolute w-2 h-2 bg-mint-400 rounded-full will-change-transform"
                     style={{
                         left: `${Math.random() * 100}%`,
                         top: `${Math.random() * 100}%`,
@@ -259,6 +261,8 @@ const DownloadSection = () => {
             </div>
         </section>
     );
-};
+});
+
+DownloadSection.displayName = 'DownloadSection';
 
 export default DownloadSection;

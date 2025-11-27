@@ -1,10 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback, memo } from 'react';
 import { Play, ArrowRight, Sparkles, Zap } from 'lucide-react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
-const Hero = () => {
+const Hero = memo(() => {
     const heroRef = useRef(null);
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
 
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
@@ -13,7 +13,7 @@ const Hero = () => {
     const x = useSpring(mouseX, springConfig);
     const y = useSpring(mouseY, springConfig);
 
-    const handleMouseMove = (e) => {
+    const handleMouseMove = useCallback((e) => {
         if (!heroRef.current) return;
         const rect = heroRef.current.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
@@ -26,7 +26,7 @@ const Hero = () => {
             x: ((e.clientX - rect.left) / rect.width) * 100,
             y: ((e.clientY - rect.top) / rect.height) * 100
         });
-    };
+    }, [mouseX, mouseY]);
 
     return (
         <section
@@ -57,7 +57,7 @@ const Hero = () => {
                     rotate: [0, 180, 360],
                 }}
                 transition={{ duration: 15, repeat: Infinity }}
-                className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-mint-500/20 rounded-full blur-[150px]"
+                className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-mint-500/20 rounded-full blur-[150px] will-change-transform"
             />
             <motion.div
                 animate={{
@@ -66,19 +66,11 @@ const Hero = () => {
                     rotate: [360, 180, 0],
                 }}
                 transition={{ duration: 18, repeat: Infinity, delay: 2 }}
-                className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-ai-purple/20 rounded-full blur-[150px]"
-            />
-            <motion.div
-                animate={{
-                    scale: [1, 1.1, 1],
-                    opacity: [0.1, 0.3, 0.1],
-                }}
-                transition={{ duration: 12, repeat: Infinity, delay: 1 }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-tech-blue/15 rounded-full blur-[180px]"
+                className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-ai-purple/20 rounded-full blur-[150px] will-change-transform"
             />
 
-            {/* Floating Particles */}
-            {[...Array(20)].map((_, i) => (
+            {/* Floating Particles - Optimized count */}
+            {[...Array(8)].map((_, i) => (
                 <motion.div
                     key={i}
                     animate={{
@@ -91,7 +83,7 @@ const Hero = () => {
                         repeat: Infinity,
                         delay: Math.random() * 5,
                     }}
-                    className="absolute w-1 h-1 bg-mint-400 rounded-full"
+                    className="absolute w-1 h-1 bg-mint-400 rounded-full will-change-transform"
                     style={{
                         left: `${Math.random() * 100}%`,
                         top: `${Math.random() * 100}%`,
@@ -278,6 +270,8 @@ const Hero = () => {
             </div>
         </section>
     );
-};
+});
+
+Hero.displayName = 'Hero';
 
 export default Hero;

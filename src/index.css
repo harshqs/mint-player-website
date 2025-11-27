@@ -161,6 +161,7 @@
   backdrop-filter: blur(40px);
   border: 1px solid rgb(255 255 255 / 0.1);
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  will-change: transform;
 }
 
 .glass-card {
@@ -168,6 +169,7 @@
   backdrop-filter: blur(12px);
   border: 1px solid rgb(255 255 255 / 0.05);
   transition: all 0.3s;
+  will-change: transform;
 }
 
 .glass-card:hover {
@@ -193,6 +195,7 @@
   align-items: center;
   gap: 0.5rem;
   color: white;
+  will-change: transform;
 }
 
 .btn-primary:hover {
@@ -213,6 +216,7 @@
   align-items: center;
   gap: 0.5rem;
   color: white;
+  will-change: transform;
 }
 
 .btn-secondary:hover {
@@ -248,6 +252,7 @@
 .hover-3d {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .hover-3d:hover {
@@ -281,6 +286,7 @@
 
 .magnetic-button {
   transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
 }
 
 .magnetic-button:hover {
@@ -317,6 +323,7 @@
   animation: var(--animate-particle-float);
   pointer-events: none;
   opacity: 0.5;
+  will-change: transform;
 }
 
 .gradient-border {
@@ -351,6 +358,7 @@
       rgba(16, 185, 129, 0.1) 100%);
   background-size: 300% 300%;
   animation: var(--animate-gradient-shift);
+  will-change: transform;
 }
 
 .backdrop-blur-premium {

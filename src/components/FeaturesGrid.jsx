@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useCallback, memo } from 'react';
 import { FolderOpen, Film, Zap, Settings } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -59,39 +59,39 @@ const getColorValues = (color) => {
     return colors[color];
 };
 
-const FeatureCard = ({ feature, index }) => {
+const FeatureCard = memo(({ feature, index }) => {
     const divRef = useRef(null);
     const [isFocused, setIsFocused] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [opacity, setOpacity] = useState(0);
     const colorValues = getColorValues(feature.color);
 
-    const handleMouseMove = (e) => {
+    const handleMouseMove = useCallback((e) => {
         if (!divRef.current) return;
 
         const div = divRef.current;
         const rect = div.getBoundingClientRect();
 
         setPosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-    };
+    }, []);
 
-    const handleFocus = () => {
+    const handleFocus = useCallback(() => {
         setIsFocused(true);
         setOpacity(1);
-    };
+    }, []);
 
-    const handleBlur = () => {
+    const handleBlur = useCallback(() => {
         setIsFocused(false);
         setOpacity(0);
-    };
+    }, []);
 
-    const handleMouseEnter = () => {
+    const handleMouseEnter = useCallback(() => {
         setOpacity(1);
-    };
+    }, []);
 
-    const handleMouseLeave = () => {
+    const handleMouseLeave = useCallback(() => {
         setOpacity(0);
-    };
+    }, []);
 
     return (
         <motion.div
@@ -178,9 +178,11 @@ const FeatureCard = ({ feature, index }) => {
             />
         </motion.div>
     );
-};
+});
 
-const FeaturesGrid = () => {
+FeatureCard.displayName = 'FeatureCard';
+
+const FeaturesGrid = memo(() => {
     return (
         <section id="features" className="py-32 relative overflow-hidden">
             {/* Background Effects */}
@@ -190,7 +192,7 @@ const FeaturesGrid = () => {
                     opacity: [0.05, 0.15, 0.05],
                 }}
                 transition={{ duration: 10, repeat: Infinity }}
-                className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-mint-500/10 rounded-full blur-[150px]"
+                className="absolute top-1/3 left-1/4 w-[600px] h-[600px] bg-mint-500/10 rounded-full blur-[150px] will-change-transform"
             />
             <motion.div
                 animate={{
@@ -198,7 +200,7 @@ const FeaturesGrid = () => {
                     opacity: [0.05, 0.15, 0.05],
                 }}
                 transition={{ duration: 12, repeat: Infinity, delay: 1 }}
-                className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-ai-purple/10 rounded-full blur-[150px]"
+                className="absolute bottom-1/3 right-1/4 w-[500px] h-[500px] bg-ai-purple/10 rounded-full blur-[150px] will-change-transform"
             />
 
             <div className="container mx-auto px-6">
@@ -230,6 +232,8 @@ const FeaturesGrid = () => {
             </div>
         </section>
     );
-};
+});
+
+FeaturesGrid.displayName = 'FeaturesGrid';
 
 export default FeaturesGrid;

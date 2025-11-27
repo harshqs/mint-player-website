@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Sparkles, MessageSquare, Clock, Brain, Send } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const AIShowcase = () => {
+const AIShowcase = memo(() => {
     const [step, setStep] = useState(0);
 
     useEffect(() => {
@@ -193,6 +193,8 @@ const AIShowcase = () => {
             </div>
         </section>
     );
-};
+});
+
+AIShowcase.displayName = 'AIShowcase';
 
 export default AIShowcase;

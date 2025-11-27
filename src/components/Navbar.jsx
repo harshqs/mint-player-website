@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, memo } from 'react';
 import { Menu, X, Sun, Moon, Download, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Navbar = () => {
+const Navbar = memo(() => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isDark, setIsDark] = useState(true);
@@ -37,7 +37,7 @@ const Navbar = () => {
         }
     }, [isDark]);
 
-    const toggleTheme = () => setIsDark(!isDark);
+    const toggleTheme = useCallback(() => setIsDark(prev => !prev), []);
 
     const navLinks = [
         { name: 'Features', href: '#features' },
@@ -51,8 +51,8 @@ const Navbar = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-                    ? 'backdrop-blur-premium py-3 border-b border-white/10 shadow-lg shadow-mint-500/5'
-                    : 'bg-transparent py-5'
+                ? 'backdrop-blur-premium py-3 border-b border-white/10 shadow-lg shadow-mint-500/5'
+                : 'bg-transparent py-5'
                 }`}
             style={{
                 background: isScrolled
@@ -265,6 +265,8 @@ const Navbar = () => {
             </AnimatePresence>
         </motion.nav>
     );
-};
+});
+
+Navbar.displayName = 'Navbar';
 
 export default Navbar;
