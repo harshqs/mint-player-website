@@ -207,7 +207,7 @@ const DownloadSection = memo(() => {
                         className="w-2.5 h-2.5 rounded-full bg-mint-500"
                     />
                     <Sparkles size={16} className="text-mint-400" />
-                    <span className="text-sm font-semibold text-mint-400">Latest Version 4.0.2</span>
+                    <span className="text-sm font-semibold text-mint-400">Latest Version 5.0.0</span>
                     <CheckCircle size={16} className="text-mint-400" />
                 </motion.div>
 
@@ -239,7 +239,7 @@ const DownloadSection = memo(() => {
                         platform="Windows"
                         icon={Monitor}
                         description="Windows 10/11 (64-bit)"
-                        downloadLink="https://github.com/harshqs/mint-player-website/releases/download/v4.0.2/Mint-Player-Setup-4.0.2.exe"
+                        downloadLink="https://github.com/harshqs/mint-player-website/releases/download/v5.0.0/Mint-Player-Setup-5.0.0.exe"
                         available={true}
                         delay={0.6}
                     />
