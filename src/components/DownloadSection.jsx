@@ -239,7 +239,7 @@ const DownloadSection = memo(() => {
                         platform="Windows"
                         icon={Monitor}
                         description="Windows 10/11 (64-bit)"
-                        downloadLink="https://github.com/harshqs/mint-player-website/releases/download/v5.0.0/Mint-Player-Setup-5.0.0.exe"
+                        downloadLink="https://github.com/harshqs/mint-player-website/releases/download/v5.0.1/Mint-Player-Setup-5.0.1.exe"
                         available={true}
                         delay={0.6}
                     />
