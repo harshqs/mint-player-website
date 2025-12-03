@@ -1,21 +1,35 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import FeaturesGrid from './components/FeaturesGrid';
-import AIShowcase from './components/AIShowcase';
-import DocsViewer from './components/DocsViewer';
+import KeyHighlights from './components/KeyHighlights';
+import MediaFeatures from './components/MediaFeatures';
+import CollectionsSection from './components/CollectionsSection';
+import ComparisonTable from './components/ComparisonTable';
+import TechSpecs from './components/TechSpecs';
 import DownloadSection from './components/DownloadSection';
 import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-900 text-white selection:bg-mint-500/30 selection:text-mint-400">
+    <div className="min-h-screen bg-gray-900 text-white selection:bg-brand-pink/30 selection:text-brand-pink">
       <Navbar />
       <main>
         <Hero />
-        <FeaturesGrid />
-        <AIShowcase />
-        <DocsViewer />
+
+        <div id="features">
+          <KeyHighlights />
+          <MediaFeatures />
+          <CollectionsSection />
+        </div>
+
+        <div id="comparison">
+          <ComparisonTable />
+        </div>
+
+        <div id="specs">
+          <TechSpecs />
+        </div>
+
         <DownloadSection />
       </main>
       <Footer />

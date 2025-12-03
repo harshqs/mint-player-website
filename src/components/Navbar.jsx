@@ -13,7 +13,7 @@ const Navbar = memo(() => {
             setIsScrolled(window.scrollY > 20);
 
             // Determine active section
-            const sections = ['features', 'ai', 'docs', 'download'];
+            const sections = ['features', 'comparison', 'specs', 'download'];
             for (const section of sections) {
                 const element = document.getElementById(section);
                 if (element) {
@@ -41,8 +41,8 @@ const Navbar = memo(() => {
 
     const navLinks = [
         { name: 'Features', href: '#features' },
-        { name: 'AI Intelligence', href: '#ai' },
-        { name: 'Docs', href: '#docs' },
+        { name: 'Comparison', href: '#comparison' },
+        { name: 'Specs', href: '#specs' },
     ];
 
     return (
@@ -51,7 +51,7 @@ const Navbar = memo(() => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-                ? 'backdrop-blur-premium py-3 border-b border-white/10 shadow-lg shadow-mint-500/5'
+                ? 'backdrop-blur-premium py-3 border-b border-white/10 shadow-lg shadow-brand-pink/5'
                 : 'bg-transparent py-5'
                 }`}
             style={{
@@ -66,7 +66,7 @@ const Navbar = memo(() => {
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: 1 }}
                     transition={{ duration: 0.6 }}
-                    className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-mint-500/50 to-transparent"
+                    className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-brand-pink/50 to-transparent"
                 />
             )}
 
@@ -79,7 +79,7 @@ const Navbar = memo(() => {
                     whileTap={{ scale: 0.95 }}
                 >
                     <motion.div
-                        className="w-10 h-10 bg-gradient-to-br from-mint-400 to-mint-600 rounded-xl flex items-center justify-center relative overflow-hidden"
+                        className="w-10 h-10 bg-gradient-to-br from-brand-pink to-brand-blue rounded-xl flex items-center justify-center relative overflow-hidden"
                         whileHover={{ rotate: 360 }}
                         transition={{ duration: 0.6 }}
                     >
@@ -93,7 +93,7 @@ const Navbar = memo(() => {
                         />
                         <Sparkles className="w-5 h-5 text-white relative z-10" />
                     </motion.div>
-                    <span className="text-xl font-bold tracking-tight group-hover:text-mint-400 transition-colors">
+                    <span className="text-xl font-bold tracking-tight group-hover:text-brand-pink transition-colors">
                         Mint Player
                     </span>
                 </motion.a>
@@ -107,12 +107,12 @@ const Navbar = memo(() => {
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.1 + 0.3 }}
-                            className="text-gray-300 hover:text-mint-400 transition-colors relative group font-medium"
+                            className="text-gray-300 hover:text-brand-pink transition-colors relative group font-medium"
                             whileHover={{ scale: 1.05 }}
                         >
                             {link.name}
                             <motion.span
-                                className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-mint-400 to-ai-blue rounded-full"
+                                className="absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-brand-pink to-brand-blue rounded-full"
                                 initial={{ width: 0 }}
                                 whileHover={{ width: '100%' }}
                                 transition={{ duration: 0.3 }}
@@ -120,7 +120,7 @@ const Navbar = memo(() => {
                             {activeLink === link.href.substring(1) && (
                                 <motion.span
                                     layoutId="activeLink"
-                                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-mint-400 to-ai-blue rounded-full"
+                                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-pink to-brand-blue rounded-full"
                                 />
                             )}
                         </motion.a>
@@ -137,7 +137,7 @@ const Navbar = memo(() => {
                         className="p-2.5 rounded-full hover:bg-white/10 transition-colors text-gray-300 hover:text-white relative overflow-hidden group"
                     >
                         <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-mint-500/20 to-ai-blue/20 opacity-0 group-hover:opacity-100 rounded-full"
+                            className="absolute inset-0 bg-gradient-to-r from-brand-pink/20 to-brand-blue/20 opacity-0 group-hover:opacity-100 rounded-full"
                             animate={{
                                 scale: [1, 1.2, 1],
                             }}
@@ -151,11 +151,11 @@ const Navbar = memo(() => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         href="#download"
-                        className="relative px-6 py-2.5 bg-gradient-to-r from-mint-500 to-ai-blue rounded-full font-semibold overflow-hidden group"
+                        className="relative px-6 py-2.5 bg-gradient-to-r from-brand-pink to-brand-blue rounded-full font-semibold overflow-hidden group"
                     >
                         {/* Animated background */}
                         <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-mint-400 to-tech-blue"
+                            className="absolute inset-0 bg-gradient-to-r from-brand-pink to-brand-blue"
                             animate={{
                                 x: ['-100%', '100%'],
                             }}
@@ -167,9 +167,9 @@ const Navbar = memo(() => {
                             className="absolute inset-0 blur-lg opacity-50"
                             animate={{
                                 boxShadow: [
-                                    '0 0 20px rgba(16, 185, 129, 0.5)',
-                                    '0 0 30px rgba(16, 185, 129, 0.7)',
-                                    '0 0 20px rgba(16, 185, 129, 0.5)',
+                                    '0 0 20px rgba(219, 39, 119, 0.5)',
+                                    '0 0 30px rgba(219, 39, 119, 0.7)',
+                                    '0 0 20px rgba(219, 39, 119, 0.5)',
                                 ],
                             }}
                             transition={{ duration: 2, repeat: Infinity }}
@@ -235,7 +235,7 @@ const Navbar = memo(() => {
                                     initial={{ x: -20, opacity: 0 }}
                                     animate={{ x: 0, opacity: 1 }}
                                     transition={{ delay: index * 0.1 }}
-                                    className="text-lg text-gray-300 hover:text-mint-400 transition-colors font-medium"
+                                    className="text-lg text-gray-300 hover:text-brand-pink transition-colors font-medium"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     {link.name}
@@ -253,7 +253,7 @@ const Navbar = memo(() => {
                                 <motion.a
                                     href="#download"
                                     whileTap={{ scale: 0.95 }}
-                                    className="px-5 py-2 bg-gradient-to-r from-mint-500 to-ai-blue rounded-full font-medium text-white"
+                                    className="px-5 py-2 bg-gradient-to-r from-brand-pink to-brand-blue rounded-full font-medium text-white"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     Get App

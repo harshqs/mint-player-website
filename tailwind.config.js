@@ -14,16 +14,16 @@ export default {
           500: '#10b981',
           900: '#064e3b',
         },
-        ai: {
-          purple: '#8b5cf6',
-          blue: '#3b82f6',
+        brand: {
+          pink: '#DB2777',
+          blue: '#3B82F6',
         },
         tech: {
           blue: '#3b82f6',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Outfit', 'sans-serif'],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

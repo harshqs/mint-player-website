@@ -1,5 +1,5 @@
 import React, { useRef, useState, useCallback, memo } from 'react';
-import { Monitor, Hammer, Download, ArrowRight, Sparkles, CheckCircle } from 'lucide-react';
+import { Monitor, Hammer, Download, ArrowRight, Sparkles, CheckCircle, Package } from 'lucide-react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 const DownloadCard = memo(({ platform, icon: Icon, description, downloadLink, available = true, delay }) => {
@@ -44,7 +44,7 @@ const DownloadCard = memo(({ platform, icon: Icon, description, downloadLink, av
                 transformStyle: 'preserve-3d',
             }}
             className={`relative glass-card p-8 rounded-2xl w-full md:w-1/3 overflow-hidden border-2 
-                ${available ? 'border-mint-500/30 shadow-xl shadow-mint-500/10' : 'opacity-60 grayscale hover:grayscale-0 border-white/10'}
+                ${available ? 'border-brand-pink/30 shadow-xl shadow-brand-pink/10' : 'opacity-60 grayscale hover:grayscale-0 border-white/10'}
                 transition-all duration-500`}
         >
             {/* Holographic Background Effect */}
@@ -61,7 +61,7 @@ const DownloadCard = memo(({ platform, icon: Icon, description, downloadLink, av
                 <motion.div
                     className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity"
                     style={{
-                        background: 'linear-gradient(135deg, transparent 0%, rgba(16, 185, 129, 0.1) 50%, transparent 100%)',
+                        background: 'linear-gradient(135deg, transparent 0%, rgba(219, 39, 119, 0.1) 50%, transparent 100%)',
                         backgroundSize: '200% 200%',
                     }}
                     animate={{
@@ -80,16 +80,16 @@ const DownloadCard = memo(({ platform, icon: Icon, description, downloadLink, av
                     } : {}}
                     transition={{ duration: 0.5 }}
                     className={`w-20 h-20 rounded-2xl flex items-center justify-center mb-6 text-white shadow-lg relative
-                        ${available ? 'bg-gradient-to-br from-mint-500 to-ai-blue shadow-mint-500/30' : 'bg-gray-700/50 text-gray-400'}`}
+                        ${available ? 'bg-gradient-to-br from-brand-pink to-brand-blue shadow-brand-pink/30' : 'bg-gray-700/50 text-gray-400'}`}
                 >
                     {available && (
                         <motion.div
                             className="absolute inset-0 rounded-2xl"
                             animate={{
                                 boxShadow: [
-                                    '0 0 20px rgba(16, 185, 129, 0.3)',
-                                    '0 0 30px rgba(16, 185, 129, 0.5)',
-                                    '0 0 20px rgba(16, 185, 129, 0.3)',
+                                    '0 0 20px rgba(219, 39, 119, 0.3)',
+                                    '0 0 30px rgba(219, 39, 119, 0.5)',
+                                    '0 0 20px rgba(219, 39, 119, 0.3)',
                                 ],
                             }}
                             transition={{ duration: 2, repeat: Infinity }}
@@ -115,11 +115,11 @@ const DownloadCard = memo(({ platform, icon: Icon, description, downloadLink, av
                         download
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="relative w-full py-4 rounded-xl bg-gradient-to-r from-mint-500 to-ai-blue font-bold text-white overflow-hidden group"
+                        className="relative w-full py-4 rounded-xl bg-gradient-to-r from-brand-pink to-brand-blue font-bold text-white overflow-hidden group"
                     >
                         {/* Ripple Effect Background */}
                         <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-mint-400 to-tech-blue"
+                            className="absolute inset-0 bg-gradient-to-r from-brand-pink to-brand-blue"
                             initial={{ scale: 0, opacity: 0 }}
                             whileHover={{ scale: 2, opacity: 0.3 }}
                             transition={{ duration: 0.6 }}
@@ -127,7 +127,7 @@ const DownloadCard = memo(({ platform, icon: Icon, description, downloadLink, av
 
                         <span className="relative z-10 flex items-center justify-center gap-3">
                             <Download size={20} />
-                            Download {platform === 'Windows' ? '.exe' : platform}
+                            Download
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                         </span>
                     </motion.a>
@@ -137,18 +137,10 @@ const DownloadCard = memo(({ platform, icon: Icon, description, downloadLink, av
                         className="w-full py-4 rounded-xl bg-gray-800 border border-gray-700 text-gray-400 cursor-not-allowed flex items-center justify-center gap-2"
                     >
                         <Hammer size={18} />
-                        <span>{platform.includes('.deb') ? 'Under Construction' : 'Coming Soon'}</span>
+                        <span>Coming Soon</span>
                     </button>
                 )}
             </div>
-
-            {/* Corner Accents */}
-            {available && (
-                <>
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-mint-500/20 to-transparent rounded-bl-full" />
-                    <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-ai-blue/20 to-transparent rounded-tr-full" />
-                </>
-            )}
         </motion.div>
     );
 });
@@ -159,39 +151,7 @@ const DownloadSection = memo(() => {
     return (
         <section id="download" className="py-32 relative overflow-hidden">
             {/* Background Gradients */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-transparent via-mint-900/10 to-transparent pointer-events-none" />
-
-            {/* Animated Orbs */}
-            <motion.div
-                animate={{
-                    scale: [1, 1.3, 1],
-                    opacity: [0.1, 0.25, 0.1],
-                    rotate: [0, 180, 360],
-                }}
-                transition={{ duration: 15, repeat: Infinity }}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-mint-500/10 rounded-full blur-[150px] pointer-events-none will-change-transform"
-            />
-
-            {/* Floating Particles - Optimized count */}
-            {[...Array(5)].map((_, i) => (
-                <motion.div
-                    key={i}
-                    animate={{
-                        y: [0, -40, 0],
-                        opacity: [0, 0.5, 0],
-                    }}
-                    transition={{
-                        duration: 4 + Math.random() * 3,
-                        repeat: Infinity,
-                        delay: Math.random() * 5,
-                    }}
-                    className="absolute w-2 h-2 bg-mint-400 rounded-full will-change-transform"
-                    style={{
-                        left: `${Math.random() * 100}%`,
-                        top: `${Math.random() * 100}%`,
-                    }}
-                />
-            ))}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-to-b from-transparent via-brand-pink/5 to-transparent pointer-events-none" />
 
             <div className="container mx-auto px-6 relative z-10 text-center">
                 {/* Version Badge */}
@@ -199,16 +159,16 @@ const DownloadSection = memo(() => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-mint-500/10 border border-mint-500/20 mb-8 hover-3d"
+                    className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-brand-pink/10 border border-brand-pink/20 mb-8 hover-3d"
                 >
                     <motion.span
                         animate={{ scale: [1, 1.2, 1] }}
                         transition={{ duration: 2, repeat: Infinity }}
-                        className="w-2.5 h-2.5 rounded-full bg-mint-500"
+                        className="w-2.5 h-2.5 rounded-full bg-brand-pink"
                     />
-                    <Sparkles size={16} className="text-mint-400" />
-                    <span className="text-sm font-semibold text-mint-400">Latest Version 5.0.9</span>
-                    <CheckCircle size={16} className="text-mint-400" />
+                    <Sparkles size={16} className="text-brand-pink" />
+                    <span className="text-sm font-semibold text-brand-pink">Latest Version 6.0.0</span>
+                    <CheckCircle size={16} className="text-brand-pink" />
                 </motion.div>
 
                 {/* Heading */}
@@ -219,7 +179,7 @@ const DownloadSection = memo(() => {
                     transition={{ delay: 0.2 }}
                     className="text-4xl md:text-6xl font-bold mb-6"
                 >
-                    Ready to <span className="text-gradient">Experience It?</span>
+                    Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-pink to-brand-blue">Experience It?</span>
                 </motion.h2>
 
                 {/* Subheading */}
@@ -230,11 +190,11 @@ const DownloadSection = memo(() => {
                     transition={{ delay: 0.4 }}
                     className="text-xl md:text-2xl text-gray-400 mb-16 max-w-3xl mx-auto"
                 >
-                    Download Mint Player today and <span className="text-mint-400 font-semibold">transform</span> how you interact with your media library.
+                    Download Mint Player today and <span className="text-brand-pink font-semibold">transform</span> how you interact with your media library.
                 </motion.p>
 
                 {/* Download Cards */}
-                <div className="flex flex-col md:flex-row items-center justify-center gap-8 max-w-6xl mx-auto perspective-1000">
+                <div className="flex flex-col md:flex-row items-center justify-center gap-8 max-w-6xl mx-auto perspective-1000 mb-24">
                     <DownloadCard
                         platform="Windows"
                         icon={Monitor}
@@ -244,20 +204,47 @@ const DownloadSection = memo(() => {
                         delay={0.6}
                     />
                     <DownloadCard
-                        platform="Linux .deb"
+                        platform="Linux"
                         icon={Hammer}
-                        description="Debian / Ubuntu"
+                        description="Debian / Ubuntu / Fedora"
                         available={false}
                         delay={0.7}
                     />
                     <DownloadCard
-                        platform="Linux .rpm"
-                        icon={Hammer}
-                        description="Fedora / Red Hat"
+                        platform="macOS"
+                        icon={Package}
+                        description="macOS 12+"
                         available={false}
                         delay={0.8}
                     />
                 </div>
+
+                {/* What You Get Section */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="max-w-4xl mx-auto glass p-8 rounded-2xl"
+                >
+                    <h3 className="text-2xl font-bold mb-8">What You Get (Free Forever)</h3>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                        {[
+                            "All Playback Features",
+                            "Dual Theme System",
+                            "Format Support",
+                            "Collections",
+                            "Auto-Updates",
+                            "No Ads",
+                            "No Tracking",
+                            "Full Privacy"
+                        ].map((item, i) => (
+                            <div key={i} className="flex items-center gap-2 text-gray-300">
+                                <CheckCircle size={16} className="text-brand-pink shrink-0" />
+                                <span className="text-sm font-medium">{item}</span>
+                            </div>
+                        ))}
+                    </div>
+                </motion.div>
             </div>
         </section>
     );

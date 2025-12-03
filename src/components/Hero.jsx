@@ -44,7 +44,7 @@ const Hero = memo(() => {
                     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                     className="absolute top-0 left-0 w-full h-full"
                     style={{
-                        background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(16, 185, 129, 0.3) 0%, transparent 50%)`
+                        background: `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, rgba(219, 39, 119, 0.2) 0%, transparent 50%)`
                     }}
                 />
             </div>
@@ -57,7 +57,7 @@ const Hero = memo(() => {
                     rotate: [0, 180, 360],
                 }}
                 transition={{ duration: 15, repeat: Infinity }}
-                className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-mint-500/20 rounded-full blur-[150px] will-change-transform"
+                className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-brand-pink/20 rounded-full blur-[150px] will-change-transform"
             />
             <motion.div
                 animate={{
@@ -66,7 +66,7 @@ const Hero = memo(() => {
                     rotate: [360, 180, 0],
                 }}
                 transition={{ duration: 18, repeat: Infinity, delay: 2 }}
-                className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-ai-purple/20 rounded-full blur-[150px] will-change-transform"
+                className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-brand-blue/20 rounded-full blur-[150px] will-change-transform"
             />
 
             {/* Floating Particles - Optimized count */}
@@ -83,7 +83,7 @@ const Hero = memo(() => {
                         repeat: Infinity,
                         delay: Math.random() * 5,
                     }}
-                    className="absolute w-1 h-1 bg-mint-400 rounded-full will-change-transform"
+                    className="absolute w-1 h-1 bg-brand-pink rounded-full will-change-transform"
                     style={{
                         left: `${Math.random() * 100}%`,
                         top: `${Math.random() * 100}%`,
@@ -96,16 +96,16 @@ const Hero = memo(() => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass mb-8 border border-mint-500/20 hover-3d"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full glass mb-8 border border-brand-pink/20 hover-3d"
                 >
                     <motion.span
                         animate={{ scale: [1, 1.2, 1] }}
                         transition={{ duration: 2, repeat: Infinity }}
-                        className="w-2 h-2 rounded-full bg-mint-500"
+                        className="w-2 h-2 rounded-full bg-brand-pink"
                     />
-                    <Sparkles size={14} className="text-mint-400" />
-                    <span className="text-sm font-medium text-mint-400">v5.0.9 Now Available</span>
-                    <Zap size={14} className="text-ai-blue" />
+                    <Sparkles size={14} className="text-brand-pink" />
+                    <span className="text-sm font-medium text-brand-pink">v6.0.0 Now Available</span>
+                    <Zap size={14} className="text-brand-blue" />
                 </motion.div>
 
                 <motion.h1
@@ -115,9 +115,9 @@ const Hero = memo(() => {
                     className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight"
                     style={{ x, y }}
                 >
-                    Media Intelligence <br />
+                    The Future of <br />
                     <motion.span
-                        className="text-gradient inline-block"
+                        className="text-transparent bg-clip-text bg-gradient-to-r from-brand-pink to-brand-blue inline-block"
                         animate={{
                             backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
                         }}
@@ -126,7 +126,7 @@ const Hero = memo(() => {
                             backgroundSize: '200% 200%',
                         }}
                     >
-                        Reimagined
+                        Media Playback
                     </motion.span>
                 </motion.h1>
 
@@ -136,7 +136,8 @@ const Hero = memo(() => {
                     transition={{ duration: 0.6, delay: 0.4 }}
                     className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed"
                 >
-                    A cinematic media player powered by <span className="text-gradient font-semibold">AI</span>. Experience strict typing, smart folders, and a beautiful glassmorphic UI that adapts to your workflow.
+                    A premium, cinematic experience for your video and audio files. <br className="hidden md:block" />
+                    Built with <span className="text-brand-pink font-semibold">Dual Themes</span>, <span className="text-brand-blue font-semibold">Glassmorphism</span>, and cutting-edge tech.
                 </motion.p>
 
                 <motion.div
@@ -149,10 +150,10 @@ const Hero = memo(() => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         href="#download"
-                        className="group relative px-10 py-5 bg-gradient-to-r from-mint-500 to-ai-blue rounded-full font-bold text-lg overflow-hidden text-white shadow-lg shadow-mint-500/25 magnetic-button"
+                        className="group relative px-10 py-5 bg-gradient-to-r from-brand-pink to-brand-blue rounded-full font-bold text-lg overflow-hidden text-white shadow-lg shadow-brand-pink/25 magnetic-button"
                     >
                         <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-mint-400 to-tech-blue opacity-0 group-hover:opacity-100 transition-opacity"
+                            className="absolute inset-0 bg-gradient-to-r from-brand-pink to-brand-blue opacity-0 group-hover:opacity-100 transition-opacity"
                             animate={{
                                 x: ['-100%', '100%'],
                             }}
@@ -201,8 +202,8 @@ const Hero = memo(() => {
                         {/* Grid Pattern */}
                         <div className="absolute inset-0 opacity-10"
                             style={{
-                                backgroundImage: `linear-gradient(rgba(16, 185, 129, 0.5) 1px, transparent 1px),
-                                                  linear-gradient(90deg, rgba(16, 185, 129, 0.5) 1px, transparent 1px)`,
+                                backgroundImage: `linear-gradient(rgba(219, 39, 119, 0.5) 1px, transparent 1px),
+                                                  linear-gradient(90deg, rgba(59, 130, 246, 0.5) 1px, transparent 1px)`,
                                 backgroundSize: '50px 50px'
                             }}
                         />
@@ -215,14 +216,14 @@ const Hero = memo(() => {
                                 className="w-24 h-24 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-xl cursor-pointer border-2 border-white/20 hover-3d group"
                                 animate={{
                                     boxShadow: [
-                                        '0 0 20px rgba(16, 185, 129, 0.3)',
-                                        '0 0 40px rgba(16, 185, 129, 0.6)',
-                                        '0 0 20px rgba(16, 185, 129, 0.3)',
+                                        '0 0 20px rgba(219, 39, 119, 0.3)',
+                                        '0 0 40px rgba(219, 39, 119, 0.6)',
+                                        '0 0 20px rgba(219, 39, 119, 0.3)',
                                     ]
                                 }}
                                 transition={{ duration: 2, repeat: Infinity }}
                             >
-                                <Play size={36} className="fill-white text-white ml-1 group-hover:fill-mint-400" />
+                                <Play size={36} className="fill-white text-white ml-1 group-hover:fill-brand-pink" />
                             </motion.div>
                         </div>
 
@@ -235,7 +236,7 @@ const Hero = memo(() => {
                                 className="glass px-4 py-2 rounded-xl border border-white/10"
                             >
                                 <p className="text-xs text-gray-400">QUALITY</p>
-                                <p className="text-sm font-bold text-mint-400">4K Ultra HD</p>
+                                <p className="text-sm font-bold text-brand-pink">4K Ultra HD</p>
                             </motion.div>
                             <motion.div
                                 initial={{ opacity: 0, x: 20 }}
@@ -244,7 +245,7 @@ const Hero = memo(() => {
                                 className="glass px-4 py-2 rounded-xl border border-white/10"
                             >
                                 <p className="text-xs text-gray-400">EXPERIENCE</p>
-                                <p className="text-sm font-bold text-ai-blue">Cinematic</p>
+                                <p className="text-sm font-bold text-brand-blue">Cinematic</p>
                             </motion.div>
                         </div>
                     </motion.div>
@@ -256,7 +257,7 @@ const Hero = memo(() => {
                             opacity: [0.3, 0.6, 0.3],
                         }}
                         transition={{ duration: 3, repeat: Infinity }}
-                        className="absolute -bottom-20 -left-20 w-40 h-40 bg-mint-500/30 rounded-full blur-3xl"
+                        className="absolute -bottom-20 -left-20 w-40 h-40 bg-brand-pink/30 rounded-full blur-3xl"
                     />
                     <motion.div
                         animate={{
@@ -264,7 +265,7 @@ const Hero = memo(() => {
                             opacity: [0.3, 0.5, 0.3],
                         }}
                         transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
-                        className="absolute -top-20 -right-20 w-48 h-48 bg-ai-purple/30 rounded-full blur-3xl"
+                        className="absolute -top-20 -right-20 w-48 h-48 bg-brand-blue/30 rounded-full blur-3xl"
                     />
                 </motion.div>
             </div>
