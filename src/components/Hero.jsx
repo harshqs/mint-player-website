@@ -104,7 +104,7 @@ const Hero = memo(() => {
                         className="w-2 h-2 rounded-full bg-mint-500"
                     />
                     <Sparkles size={14} className="text-mint-400" />
-                    <span className="text-sm font-medium text-mint-400">v5.0.1 Now Available</span>
+                    <span className="text-sm font-medium text-mint-400">v5.0.9 Now Available</span>
                     <Zap size={14} className="text-ai-blue" />
                 </motion.div>
 
