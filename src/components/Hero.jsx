@@ -104,7 +104,7 @@ const Hero = memo(() => {
                         className="w-2 h-2 rounded-full bg-brand-pink"
                     />
                     <Sparkles size={14} className="text-brand-pink" />
-                    <span className="text-sm font-medium text-brand-pink">v6.0.0 Now Available</span>
+                    <span className="text-sm font-medium text-brand-pink">v6.0.2 Now Available</span>
                     <Zap size={14} className="text-brand-blue" />
                 </motion.div>
 
@@ -136,8 +136,8 @@ const Hero = memo(() => {
                     transition={{ duration: 0.6, delay: 0.4 }}
                     className="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed"
                 >
-                    A premium, cinematic experience for your video and audio files. <br className="hidden md:block" />
-                    Built with <span className="text-brand-pink font-semibold">Dual Themes</span>, <span className="text-brand-blue font-semibold">Glassmorphism</span>, and cutting-edge tech.
+                    A premium, cinematic experience with <span className="text-brand-pink font-semibold">Recent Files</span>, <span className="text-brand-blue font-semibold">Smart Resume</span>, and <span className="text-mint-400 font-semibold">Customizable Shortcuts</span>. <br className="hidden md:block" />
+                    Never lose your place. Control your way.
                 </motion.p>
 
                 <motion.div

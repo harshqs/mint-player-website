@@ -167,7 +167,7 @@ const DownloadSection = memo(() => {
                         className="w-2.5 h-2.5 rounded-full bg-brand-pink"
                     />
                     <Sparkles size={16} className="text-brand-pink" />
-                    <span className="text-sm font-semibold text-brand-pink">Latest Version 6.0.0</span>
+                    <span className="text-sm font-semibold text-brand-pink">Latest Version 6.0.2</span>
                     <CheckCircle size={16} className="text-brand-pink" />
                 </motion.div>
 
@@ -199,7 +199,7 @@ const DownloadSection = memo(() => {
                         platform="Windows"
                         icon={Monitor}
                         description="Windows 10/11 (64-bit)"
-                        downloadLink="https://github.com/harshqs/mint-player-website/releases/download/v6.0.0/Mint-Player-Setup-6.0.0.exe"
+                        downloadLink="https://github.com/harshqs/mint-player-website/releases/download/v6.0.2/Mint-Player-Setup-6.0.2.exe"
                         available={true}
                         delay={0.6}
                     />
@@ -229,14 +229,14 @@ const DownloadSection = memo(() => {
                     <h3 className="text-2xl font-bold mb-8">What You Get (Free Forever)</h3>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         {[
-                            "All Playback Features",
-                            "Dual Theme System",
-                            "Format Support",
+                            "Recent Files",
+                            "Smart Resume",
+                            "Custom Shortcuts",
+                            "All Formats",
+                            "Dual Themes",
                             "Collections",
                             "Auto-Updates",
-                            "No Ads",
-                            "No Tracking",
-                            "Full Privacy"
+                            "No Ads"
                         ].map((item, i) => (
                             <div key={i} className="flex items-center gap-2 text-gray-300">
                                 <CheckCircle size={16} className="text-brand-pink shrink-0" />

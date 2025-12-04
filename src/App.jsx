@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import NewFeatures from './components/NewFeatures';
 import KeyHighlights from './components/KeyHighlights';
 import MediaFeatures from './components/MediaFeatures';
 import CollectionsSection from './components/CollectionsSection';
@@ -15,6 +16,7 @@ function App() {
       <Navbar />
       <main>
         <Hero />
+        <NewFeatures />
 
         <div id="features">
           <KeyHighlights />
